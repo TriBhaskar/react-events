@@ -12,13 +12,14 @@ export default function FindEventSection() {
   const { data, isPending, isError, error } = useQuery({
     queryKey: ["events", { search: searchTerm }],
     queryFn: () => fetchEvents(searchTerm),
-  });
+  }); // react tanstack query with parameters
 
   function handleSubmit(event) {
     event.preventDefault();
     setSearchTerm(searchElement.current.value);
   }
 
+  //validating content
   let content = <p>Please enter a search term and to find events.</p>;
 
   if (isPending) {
