@@ -6,31 +6,30 @@ import ErrorBlock from "../UI/ErrorBlock";
 import EventItem from "./EventItem";
 
 export default function FindEventSection() {
-  const searchElement = useRef();
-  const [searchTerm, setSearchTerm] = useState();
+  const searchElement = useRef(); // Reference to the search input element
+  const [searchTerm, setSearchTerm] = useState(); // State to store the search term
 
   const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["events", { search: searchTerm }],
-    queryFn: ({ signal }) => fetchEvents({ signal, searchTerm }),
-    enabled: searchTerm !== undefined,
-  }); // react tanstack query with parameters
+    queryKey: ["events", { search: searchTerm }], // Query key for caching
+    queryFn: ({ signal }) => fetchEvents({ signal, searchTerm }), // Function to fetch events
+    enabled: searchTerm !== undefined, // Enable the query when search term is defined
+  });
 
   function handleSubmit(event) {
     event.preventDefault();
-    setSearchTerm(searchElement.current.value);
+    setSearchTerm(searchElement.current.value); // Update the search term state
   }
 
-  //validating content
-  let content = <p>Please enter a search term and to find events.</p>;
+  let content = <p>Please enter a search term to find events.</p>; // Default content
 
   if (isLoading) {
-    content = <LoadingIndicator />;
+    content = <LoadingIndicator />; // Show loading indicator while fetching events
   }
   if (isError) {
     content = (
       <ErrorBlock
         title="An error occurred"
-        message={error.info?.message || "Failed to fetch events."}
+        message={error.info?.message || "Failed to fetch events."} // Show error message if fetching events failed
       />
     );
   }
@@ -54,7 +53,7 @@ export default function FindEventSection() {
           <input
             type="search"
             placeholder="Search events"
-            ref={searchElement}
+            ref={searchElement} // Bind the search input element to the reference
           />
           <button>Search</button>
         </form>

@@ -1,3 +1,4 @@
+// Importing necessary dependencies
 import {
   Navigate,
   RouterProvider,
@@ -9,6 +10,7 @@ import EventDetails from "./components/Events/EventDetails.jsx";
 import NewEvent from "./components/Events/NewEvent.jsx";
 import EditEvent from "./components/Events/EditEvent.jsx";
 
+// Creating the router configuration
 const router = createBrowserRouter([
   {
     path: "/",
@@ -37,10 +39,15 @@ const router = createBrowserRouter([
   },
 ]);
 
+// Creating an instance of QueryClient
 const queryClient = new QueryClient();
+
+// App component
 function App() {
   return (
+    // Providing QueryClient to the app
     <QueryClientProvider client={queryClient}>
+      {/* Providing Router configuration to the app */}
       <RouterProvider router={router} />
     </QueryClientProvider>
   );
