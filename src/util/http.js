@@ -1,6 +1,14 @@
 import { QueryClient } from "@tanstack/react-query";
 
 export const queryClient = new QueryClient();
+/**
+ * Fetches events from the server based on the provided search term.
+ * @param {Object} options - The options for fetching events.
+ * @param {AbortSignal} options.signal - The signal object used to abort the fetch request.
+ * @param {string} options.searchTerm - The search term to filter events.
+ * @returns {Promise<Array>} - A promise that resolves to an array of events.
+ * @throws {Error} - If an error occurs while fetching the events.
+ */
 export async function fetchEvents({ signal, searchTerm }) {
   console.log(searchTerm);
   let url = "http://localhost:3000/events";
