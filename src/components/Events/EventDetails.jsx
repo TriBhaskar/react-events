@@ -5,6 +5,10 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { deleteEvent, fetchEvent, queryClient } from "../../util/http.js";
 import ErrorBlock from "../UI/ErrorBlock.jsx";
 
+/**
+ * Renders the details of an event.
+ * @returns {JSX.Element} The event details component.
+ */
 export default function EventDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -13,6 +17,9 @@ export default function EventDetails() {
     queryFn: ({ signal }) => fetchEvent({ id, signal }),
   });
 
+  /**
+   * Deletes the event and navigates to the events page.
+   */
   const { mutate } = useMutation({
     mutationFn: deleteEvent,
     onSuccess: () => {
@@ -22,10 +29,16 @@ export default function EventDetails() {
       navigate("/events");
     },
   });
+
+  /**
+   * Handles the delete button click event.
+   */
   function handleDelete() {
     mutate({ id });
   }
+
   let content;
+
   if (isPending) {
     content = (
       <div id="event-details-content" className="center">
@@ -46,12 +59,14 @@ export default function EventDetails() {
       </div>
     );
   }
+
   if (data) {
     const formattedDate = new Date(data.date).toLocaleDateString("en-IN", {
       day: "numeric",
       month: "long",
       year: "numeric",
     });
+
     content = (
       <>
         <header>
@@ -76,6 +91,7 @@ export default function EventDetails() {
       </>
     );
   }
+
   return (
     <>
       <Outlet />
