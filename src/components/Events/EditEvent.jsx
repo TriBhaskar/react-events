@@ -21,7 +21,15 @@ export default function EditEvent() {
       // Optimistic update
       const newEvent = data.event;
       await queryClient.cancelQueries({ queryKey: ["events", id] });
+      const previousEvent = queryClient.getQueryData(["events", id]);
       queryClient.setQueryData(["events", id], newEvent);
+      return { previousEvent };
+    },
+    onError: (error, data, context) => {
+      queryClient.setQueryData(["events", id], context.previousEvent);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries(["events", id]);
     },
   });
 
