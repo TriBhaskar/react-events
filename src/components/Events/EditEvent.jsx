@@ -10,11 +10,14 @@ import ErrorBlock from "../UI/ErrorBlock.jsx";
 export default function EditEvent() {
   const navigate = useNavigate();
   const { id } = useParams();
+
+  // Fetch event data using react-query
   const { data, isPending, isError, error } = useQuery({
     queryKey: ["events", id],
     queryFn: ({ signal }) => fetchEvent({ signal, id }),
   });
 
+  // Update event data using react-query mutation
   const { mutate } = useMutation({
     mutationFn: updateEvent,
     onMutate: async (data) => {
@@ -33,16 +36,20 @@ export default function EditEvent() {
     },
   });
 
+  // Handle form submission
   function handleSubmit(formData) {
     mutate({ id: id, event: formData });
     navigate("../");
   }
 
+  // Handle modal close
   function handleClose() {
     navigate("../");
   }
+
   let content;
   if (isPending) {
+    // Show loading indicator while fetching event data
     content = (
       <div className="center">
         <LoadingIndicator />
@@ -50,6 +57,7 @@ export default function EditEvent() {
     );
   }
   if (isError) {
+    // Show error message if there's an error fetching event data
     content = (
       <>
         <ErrorBlock
@@ -68,6 +76,7 @@ export default function EditEvent() {
     );
   }
   if (data) {
+    // Show event form with pre-filled data if event data is available
     content = (
       <EventForm inputData={data} onSubmit={handleSubmit}>
         <Link to="../" className="button-text">
@@ -79,5 +88,7 @@ export default function EditEvent() {
       </EventForm>
     );
   }
+
+  // Render the modal with the content
   return <Modal onClose={handleClose}>{content}</Modal>;
 }
