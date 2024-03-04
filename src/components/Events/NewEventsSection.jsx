@@ -7,8 +7,8 @@ import { fetchEvents } from "../../util/http.js";
 export default function NewEventsSection() {
   // Fetch events using react-query
   const { data, isPending, isError, error } = useQuery({
-    queryKey: ["events"],
-    queryFn: fetchEvents,
+    queryKey: ["events", { max: 3 }],
+    queryFn: ({ signal, queryKey }) => fetchEvents({ signal, ...queryKey[1] }),
     staleTime: 5000, // Time taken to send request again
     //gcTime:1000 // Time taken for the cache to store
   });
