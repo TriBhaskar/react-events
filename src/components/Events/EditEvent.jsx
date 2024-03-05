@@ -2,6 +2,7 @@ import {
   Link,
   redirect,
   useNavigate,
+  useNavigation,
   useParams,
   useSubmit,
 } from "react-router-dom";
@@ -14,6 +15,7 @@ import ErrorBlock from "../UI/ErrorBlock.jsx";
 
 export default function EditEvent() {
   const navigate = useNavigate();
+  const { state } = useNavigation();
   const submit = useSubmit();
   const { id } = useParams();
 
@@ -76,12 +78,18 @@ export default function EditEvent() {
     // Show event form with pre-filled data if event data is available
     content = (
       <EventForm inputData={data} onSubmit={handleSubmit}>
-        <Link to="../" className="button-text">
-          Cancel
-        </Link>
-        <button type="submit" className="button">
-          Update
-        </button>
+        {state === "submitting" ? (
+          <p>Sending data...</p>
+        ) : (
+          <>
+            <Link to="../" className="button-text">
+              Cancel
+            </Link>
+            <button type="submit" className="button">
+              Update
+            </button>
+          </>
+        )}
       </EventForm>
     );
   }

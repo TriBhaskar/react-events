@@ -70,9 +70,9 @@ app.get("/events/:id", async (req, res) => {
       .json({ message: `For the id ${id}, no event could be found.` });
   }
 
-  // setTimeout(() => {
-  // }, 1000);
-  res.json({ event });
+  setTimeout(() => {
+    res.json({ event });
+  }, 1000);
 });
 
 app.post("/events", async (req, res) => {
@@ -145,9 +145,9 @@ app.put("/events/:id", async (req, res) => {
 
   await fs.writeFile("./data/events.json", JSON.stringify(events));
 
-  // setTimeout(() => {
-  // }, 1000);
-  res.json({ event: events[eventIndex] });
+  setTimeout(() => {
+    res.json({ event: events[eventIndex] });
+  }, 1000);
 });
 
 app.delete("/events/:id", async (req, res) => {
