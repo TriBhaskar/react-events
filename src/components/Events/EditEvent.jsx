@@ -4,7 +4,6 @@ import Modal from "../UI/Modal.jsx";
 import EventForm from "./EventForm.jsx";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { fetchEvent, updateEvent, queryClient } from "../../util/http.js";
-import LoadingIndicator from "../UI/LoadingIndicator.jsx";
 import ErrorBlock from "../UI/ErrorBlock.jsx";
 
 export default function EditEvent() {
@@ -12,7 +11,7 @@ export default function EditEvent() {
   const { id } = useParams();
 
   // Fetch event data using react-query
-  const { data, isPending, isError, error } = useQuery({
+  const { data, isError, error } = useQuery({
     queryKey: ["events", id],
     queryFn: ({ signal }) => fetchEvent({ signal, id }),
   });
@@ -48,14 +47,6 @@ export default function EditEvent() {
   }
 
   let content;
-  if (isPending) {
-    // Show loading indicator while fetching event data
-    content = (
-      <div className="center">
-        <LoadingIndicator />
-      </div>
-    );
-  }
   if (isError) {
     // Show error message if there's an error fetching event data
     content = (
@@ -91,4 +82,11 @@ export default function EditEvent() {
 
   // Render the modal with the content
   return <Modal onClose={handleClose}>{content}</Modal>;
+}
+
+export function loader({ params }) {
+  return queryClient.fetchQuery({
+    queryKey: ["events", params.id],
+    queryFn: ({ signal }) => fetchEvent({ signal, id: params.id }),
+  });
 }
