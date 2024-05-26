@@ -1,5 +1,5 @@
 import fs from "node:fs/promises";
-
+import cors from "cors";
 import bodyParser from "body-parser";
 import express from "express";
 
@@ -8,6 +8,12 @@ const app = express();
 app.use(bodyParser.json());
 app.use(express.static("public"));
 
+app.use(
+  cors({
+    origin: ["https://react-events-nine.vercel.app/"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  })
+);
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
