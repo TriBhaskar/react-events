@@ -10,8 +10,9 @@ app.use(express.static("public"));
 
 app.use(
   cors({
-    origin: ["https://my-event-seven.vercel.app/"],
+    origin: ["https://my-event-seven.vercel.app"],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["X-Requested-With", "content-type"],
   })
 );
 app.use((req, res, next) => {
