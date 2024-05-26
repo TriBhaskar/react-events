@@ -10,7 +10,7 @@ app.use(express.static("public"));
 
 app.use(
   cors({
-    origin: ["https://react-events-nine.vercel.app/"],
+    origin: ["https://my-event-seven.vercel.app/"],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   })
 );
