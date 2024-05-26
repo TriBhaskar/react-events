@@ -9,7 +9,7 @@ export default function EventItem({ event }) {
   return (
     <article className="event-item">
       <img
-        src={`https://react-events-nine.vercel.app/${event.image}`}
+        src={`https://react-events-fksu.vercel.app/${event.image}`}
         alt={event.title}
       />
       <div className="event-item-content">

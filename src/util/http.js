@@ -10,7 +10,7 @@ export const queryClient = new QueryClient();
  * @throws {Error} - If an error occurs while fetching the events.
  */
 export async function fetchEvents({ signal, searchTerm, max }) {
-  let url = "https://react-events-nine.vercel.app/events";
+  let url = "https://react-events-fksu.vercel.app/events";
 
   if (searchTerm && max) {
     url += "?search=" + searchTerm + "&max=" + max;
@@ -35,7 +35,7 @@ export async function fetchEvents({ signal, searchTerm, max }) {
 }
 
 export async function createNewEvent(eventData) {
-  const response = await fetch(`https://react-events-nine.vercel.app/events`, {
+  const response = await fetch(`https://react-events-fksu.vercel.app/events`, {
     method: "POST",
     body: JSON.stringify(eventData),
     headers: {
@@ -57,7 +57,7 @@ export async function createNewEvent(eventData) {
 
 export async function fetchSelectableImages({ signal }) {
   const response = await fetch(
-    `https://react-events-nine.vercel.app/events/images`,
+    `https://react-events-fksu.vercel.app/events/images`,
     {
       signal,
     }
@@ -77,7 +77,7 @@ export async function fetchSelectableImages({ signal }) {
 
 export async function fetchEvent({ id, signal }) {
   const response = await fetch(
-    `https://react-events-nine.vercel.app/events/${id}`,
+    `https://react-events-fksu.vercel.app/events/${id}`,
     {
       signal,
     }
@@ -97,7 +97,7 @@ export async function fetchEvent({ id, signal }) {
 
 export async function deleteEvent({ id }) {
   const response = await fetch(
-    `https://react-events-nine.vercel.app/events/${id}`,
+    `https://react-events-fksu.vercel.app/events/${id}`,
     {
       method: "DELETE",
     }
@@ -114,7 +114,7 @@ export async function deleteEvent({ id }) {
 }
 export async function updateEvent({ id, event }) {
   const response = await fetch(
-    `https://react-events-nine.vercel.app/events/${id}`,
+    `https://react-events-fksu.vercel.app/events/${id}`,
     {
       method: "PUT",
       body: JSON.stringify({ event }),

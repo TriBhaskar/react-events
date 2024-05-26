@@ -95,7 +95,7 @@ export default function EventDetails() {
         </header>
         <div id="event-details-content">
           <img
-            src={`https://react-events-nine.vercel.app/${data.image}`}
+            src={`https://react-events-fksu.vercel.app/${data.image}`}
             alt={data.title}
           />
           <div id="event-details-info">

@@ -10,7 +10,7 @@ export default function ImagePicker({ images, selectedImage, onSelect }) {
             className={selectedImage === image.path ? "selected" : undefined}
           >
             <img
-              src={`https://react-events-nine.vercel.app/${image.path}`}
+              src={`https://react-events-fksu.vercel.app/${image.path}`}
               alt={image.caption}
             />
           </li>
