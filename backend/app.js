@@ -15,6 +15,7 @@ app.use(
     allowedHeaders: ["X-Requested-With", "content-type"],
   })
 );
+/*
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -27,6 +28,7 @@ app.use((req, res, next) => {
   );
   next();
 });
+*/
 app.get("/", (req, res) => {
   res.json("hello");
 });
